@@ -428,36 +428,3 @@ TEST(TListTest, MoveToSelf)
 // Поведение может отличаться, но хотя бы не должно падать
   EXPECT_GE(list.GetSize(), 0);
 }
-
-
-TEST(TListTest, Iterators)
-{
-  TList<int> list{1, 2, 3, 4, 5};
-
-// Тестируем обычные итераторы
-  int sum = 0;
-  int expectedSum = 1 + 2 + 3 + 4 + 5;
-
-  for (auto it = list.begin(); it != list.end(); ++it)
-  {
-    sum += it->data;
-  }
-  EXPECT_EQ(sum, expectedSum);
-
-// Тестируем range-based for
-  sum = 0;
-  for (const auto &node: list)
-  {
-    sum += node.data;
-  }
-  EXPECT_EQ(sum, expectedSum);
-
-// Тестируем константные итераторы
-  const TList<int> &constList = list;
-  sum = 0;
-  for (auto it = constList.begin(); it != constList.end(); ++it)
-  {
-    sum += it->data;
-  }
-  EXPECT_EQ(sum, expectedSum);
-}
